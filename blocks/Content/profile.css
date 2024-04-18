@@ -64,6 +64,12 @@
     text-align: center;
     margin: auto;
   }
+
+  .profile__button-add {
+    background-image: url(../../images/Buttons/Add-button-mobile.svg);
+    width: 282px;
+    margin: 36px 0;
+  }
 }
 
 @media screen and (max-width: 425px) {
@@ -92,11 +98,5 @@
     height: 18px;
     width: 18px;
     margin: 0 0 0 10px;
-  }
-
-  .profile__button-add {
-    background-image: url(../../images/Buttons/Add-button-mobile.svg);
-    width: 282px;
-    margin: 36px 0;
   }
 }
