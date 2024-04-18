@@ -1,0 +1,54 @@
+.cards {
+  font-weight: 900;
+  color: black;
+}
+.cards__list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 282px);
+  grid-gap: 20px 17px;
+  padding: 0;
+  margin: 51px 0 67px;
+  justify-content: center;
+}
+.cards__content {
+  border-radius: 10px;
+  overflow: hidden;
+  width: 282px;
+  height: 361px;
+  background-color: white;
+}
+.cards__image {
+  width: 100%;
+}
+.cards__caption {
+  max-width: 282px;
+  display: flex;
+  margin: 0 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+.cards__title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.cards__button-favorite {
+  background-image: url(../../images/Buttons/Favorite-Button.svg);
+  background-color: white;
+  border: none;
+  padding: 0;
+  width: 21px;
+  height: 18px;
+  margin: 0;
+  transition: 0.3s linear;
+}
+.cards__button-favorite:hover {
+  opacity: 50%;
+  transition: 0.3s linear;
+}
+@media screen and (max-width: 768px) {
+  .cards__list {
+    margin: 0 0 48px;
+  }
+}
