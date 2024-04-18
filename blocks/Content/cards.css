@@ -2,6 +2,7 @@
   font-weight: 900;
   color: black;
 }
+
 .cards__list {
   list-style: none;
   display: grid;
@@ -11,6 +12,7 @@
   margin: 51px 0 67px;
   justify-content: center;
 }
+
 .cards__content {
   border-radius: 10px;
   overflow: hidden;
@@ -18,9 +20,11 @@
   height: 361px;
   background-color: white;
 }
+
 .cards__image {
   width: 100%;
 }
+
 .cards__caption {
   max-width: 282px;
   display: flex;
@@ -28,11 +32,14 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .cards__title {
+  font-size: 1.5rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
+
 .cards__button-favorite {
   background-image: url(../../images/Buttons/Favorite-Button.svg);
   background-color: white;
@@ -43,10 +50,11 @@
   margin: 0;
   transition: 0.3s linear;
 }
+
 .cards__button-favorite:hover {
   opacity: 50%;
-  transition: 0.3s linear;
 }
+
 @media screen and (max-width: 768px) {
   .cards__list {
     margin: 0 0 48px;
