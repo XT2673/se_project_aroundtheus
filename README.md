@@ -30,21 +30,9 @@ Hey, everyone! Julian here with another project I built during my time in the Tr
 
 So... what have we learned from this project?
 
-1. I am a little too organized when it comes to flat BEM methodology!
+1. Responsive layouts can be a bit tricky, but dev tools have very quickly become my new best friend! Even learning new tools within the suite ,like "Network" when deploying pages from Github, helped tackle a few issues with some CSS files not loading properly (to which I facepalmed and corrected the case-sensitive issue immediately, all while swearing under my breath. I hear making rookie mistakes and swearing under your breath while correcting them is a common thing, so I'll fit right in!).
 
-   ```
-    "Hey, you gotta split your CSS into different files per block"
-    Why's that?
-    "To make things more organized and easier"
-    MORE ORGANIZED AND EASIER?!
-    "Yes! It's really a-... why are you laughing maniacally?"
-   ```
-
-   I keep my files _very_ organized. All block elements go in their respective files, but I take it a step further and put them in respective folders nested in ithe "blocks" folder. Header blocks go in the "Header" folder, content blocks go in the "Content" folder, etc. I'm sure that will evolve as time goes on, but it's a very effective and efficient (at least to me) way of keeping my CSS organized. Granted, there isn't much to work with, now... but good practices should be started early so that they're in place when the more complex projects come along!
-
-2. Responsive layouts can be a bit tricky, but dev tools have very quickly become my new best friend! Even learning new tools within the suite ,like "Network" when deploying pages from Github, helped tackle a few issues with some CSS files not loading properly (to which I facepalmed and corrected the case-sensitive issue immediately, all while swearing under my breath. I hear making rookie mistakes and swearing under your breath while correcting them is a common thing, so I'll fit right in!).
-
-3. Figma is a powerful design tool! I've used it in the past for vector art, but never considered how versatile it could actually be when building a web page (or really any page for that matter).
+2. Figma is a powerful design tool! I've used it in the past for vector art, but never considered how versatile it could actually be when building a web page (or really any page for that matter).
 
 **What can be done to improve this project?**
 

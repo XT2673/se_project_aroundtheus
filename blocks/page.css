@@ -1,16 +1,34 @@
 .page {
   background-color: black;
   color: white;
-  padding: 45px 200px 60px;
   font-family: "Inter", arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
-  max-width: 880px;
+  line-height: 21.78px;
   margin: auto;
 }
 
+.page__content {
+  margin: auto;
+  max-width: 880px;
+  padding: 3.125% 15.625% 4.688%;
+}
+
+@media screen and (max-width: 896px) {
+  .page__content {
+    padding-top: 28px;
+  }
+}
+
 @media screen and (max-width: 768px) {
-  .page {
+  .page__content {
+    padding-bottom: 36px;
+  }
+}
+
+@media screen and (max-width: 411px) {
+  .page__content {
+    width: 282px;
     padding: 28px 19px 36px;
   }
 }

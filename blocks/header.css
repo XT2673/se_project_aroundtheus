@@ -1,0 +1,29 @@
+.header {
+  max-width: 880px;
+  border-bottom: solid 1px rgba(84, 84, 84, 0.7);
+}
+
+.header__title {
+  margin-bottom: 4.004%;
+  width: 100%;
+  max-width: 173px;
+  height: auto;
+}
+
+@media screen and (max-width: 1024px) {
+  .header__title {
+    max-width: 157px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header__title {
+    max-width: 141px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .header__title {
+    max-width: 126px;
+  }
+}

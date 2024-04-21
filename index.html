@@ -12,107 +12,105 @@
   </head>
   <body>
     <div class="page">
-      <header class="header">
-        <img
-          src="./images/Around the US White.svg"
-          alt="Around the US logo"
-          class="header__title"
-        />
-      </header>
-      <main class="content">
-        <section class="profile">
+      <div class="page__content">
+        <header class="header">
           <img
-            src="./images/JCAvatar.png"
-            alt="Jacque Cousteau"
-            class="profile__image"
+            src="./images/Around-the-US-White.svg"
+            alt="Around the US logo"
+            class="header__title"
           />
-          <div class="profile__caption">
-            <h1 class="profile__heading">Jacque Cousteau</h1>
-            <button class="profile__button-edit"></button>
-            <p class="profile__subheading">Explorer</p>
-          </div>
-          <button class="profile__button-add"></button>
-        </section>
-        <section class="cards">
-          <ul class="cards__list">
-            <li class="cards__content">
+        </header>
+        <main class="content">
+          <section class="profile">
+            <div class="profile__container">
               <img
-                src="./images/Photos/yosemite-valley.jpg"
-                class="cards__image"
+                src="./images/JCAvatar.png"
+                alt="Jacque Cousteau"
+                class="profile__image"
               />
-              <div class="cards__caption">
-                <h2 class="cards__title">Yosemite Valley</h2>
-                <button class="cards__button-favorite"></button>
+              <div class="profile__caption">
+                <h1 class="profile__heading">Jacque Cousteau</h1>
+                <button type="Edit" class="profile__button-edit"></button>
+                <p class="profile__subheading">Explorer</p>
               </div>
-            </li>
-            <li class="cards__content">
-              <img src="./images/Photos/lake-louise.jpg" class="card__image" />
-              <div class="cards__caption">
-                <h2 class="cards__title">Lake Louise</h2>
+            </div>
+            <button type="Add" class="profile__button-add"></button>
+          </section>
+          <section class="cards">
+            <ul class="cards__list">
+              <li class="cards__content">
                 <img
-                  src="./images/Buttons/Favorite-Button.svg"
-                  alt="Favorite button"
-                  class="cards__button-favorite"
+                  src="./images/Photos/yosemite-valley.jpg"
+                  alt="Yosemite Valley"
+                  class="cards__image"
                 />
-              </div>
-            </li>
-            <li class="cards__content">
-              <img
-                src="./images/Photos/bald-mountains.jpg"
-                class="cards__image"
-              />
-              <div class="cards__caption">
-                <h2 class="cards__title">Bald Mountains</h2>
+                <div class="cards__caption">
+                  <h2 class="cards__title">Yosemite Valley</h2>
+                  <button class="cards__button-favorite"></button>
+                </div>
+              </li>
+              <li class="cards__content">
                 <img
-                  src="./images/Buttons/Favorite-Button.svg"
-                  alt="Favorite button"
-                  class="cards__button-favorite"
+                  src="./images/Photos/lake-louise.jpg"
+                  alt="Lake Louise"
+                  class="card__image"
                 />
-              </div>
-            </li>
-            <li class="cards__content">
-              <img src="./images/Photos/latemar.jpg" class="card__image" />
-              <div class="cards__caption">
-                <h2 class="cards__title">Latemar</h2>
+                <div class="cards__caption">
+                  <h2 class="cards__title">Lake Louise</h2>
+                  <button class="cards__button-favorite"></button>
+                </div>
+              </li>
+              <li class="cards__content">
                 <img
-                  src="./images/Buttons/Favorite-Button.svg"
-                  alt="Favorite button"
-                  class="cards__button-favorite"
+                  src="./images/Photos/bald-mountains.jpg"
+                  alt="Bald Mountains"
+                  class="cards__image"
                 />
-              </div>
-            </li>
-            <li class="cards__content">
-              <img
-                src="./images/Photos/vanoise-national-park.jpg"
-                class="cards__image"
-              />
-              <div class="cards__caption">
-                <h2 class="cards__title">Vanoise National Park</h2>
+                <div class="cards__caption">
+                  <h2 class="cards__title">Bald Mountains</h2>
+                  <button class="cards__button-favorite"></button>
+                </div>
+              </li>
+              <li class="cards__content">
                 <img
-                  src="./images/Buttons/Favorite-Button.svg"
-                  alt="Favorite button"
-                  class="cards__button-favorite"
+                  src="./images/Photos/latemar.jpg"
+                  alt="Latemar"
+                  class="card__image"
                 />
-              </div>
-            </li>
-            <li class="cards__content">
-              <img
-                src="./images/Photos/lago-di-braies.jpg"
-                class="cards__image"
-              />
-              <div class="cards__caption">
-                <h2 class="cards__title">Lago di Braies</h2>
+                <div class="cards__caption">
+                  <h2 class="cards__title">Latemar</h2>
+                  <button class="cards__button-favorite"></button>
+                </div>
+              </li>
+              <li class="cards__content">
                 <img
-                  src="./images/Buttons/Favorite-Button.svg"
-                  alt="Favorite button"
-                  class="cards__button-favorite"
+                  src="./images/Photos/vanoise-national-park.jpg"
+                  alt="Vanoise National Park"
+                  class="cards__image"
                 />
-              </div>
-            </li>
-          </ul>
-        </section>
-      </main>
-      <footer class="footer">&copy; 2022 Around The U.S.</footer>
+                <div class="cards__caption">
+                  <h2 class="cards__title">Vanoise National Park</h2>
+                  <button class="cards__button-favorite"></button>
+                </div>
+              </li>
+              <li class="cards__content">
+                <img
+                  src="./images/Photos/lago-di-braies.jpg"
+                  alt="Lago di Braies"
+                  class="cards__image"
+                />
+                <div class="cards__caption">
+                  <h2 class="cards__title">Lago di Braies</h2>
+                  <button class="cards__button-favorite"></button>
+                </div>
+              </li>
+            </ul>
+          </section>
+        </main>
+        <footer class="footer">
+          <p class="footer__title">&copy; 2022 Around The U.S.</p>
+        </footer>
+      </div>
     </div>
   </body>
 </html>

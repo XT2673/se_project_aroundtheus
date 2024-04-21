@@ -2,11 +2,17 @@
   display: flex;
   flex-wrap: wrap;
   margin: 40px 0 0;
+  justify-content: space-between;
+}
+
+.profile__container {
+  display: flex;
 }
 
 .profile__image {
   height: 120px;
   width: 120px;
+  border-radius: 50%;
 }
 
 .profile__caption {
@@ -17,18 +23,23 @@
   display: inline-flex;
   font-size: 2.625rem;
   font-weight: 500;
+  line-height: 1;
   margin: 0 0 16px 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .profile__button-edit {
   background-image: url(../../images/Buttons/Edit-Button.svg);
-  background-color: black;
+  background-color: transparent;
   border: none;
   padding: 0;
   margin-left: 18px;
   width: 24px;
   height: 24px;
   transition: 0.3s linear;
+  cursor: pointer;
 }
 
 .profile__button-edit:hover {
@@ -37,25 +48,47 @@
 
 .profile__subheading {
   margin: 0;
+  font-size: 1em;
+  line-height: 1.21;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .profile__button-add {
   background-image: url(../../images/Buttons/Add-Button.svg);
-  background-color: black;
+  background-color: transparent;
   border: none;
   padding: 0;
   width: 150px;
   height: 50px;
   margin: 35px 0;
   transition: 0.3s linear;
+  cursor: pointer;
 }
 
 .profile__button-add:hover {
   opacity: 60%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1016px) {
   .profile {
+    justify-content: center;
+  }
+
+  .profile__button-add {
+    background-image: url(../../images/Buttons/Add-button-mobile.svg);
+    width: 282px;
+    margin: 36px auto;
+  }
+}
+
+@media screen and (max-width: 797px) {
+  .profile {
+    flex-direction: column;
+    align-items: center;
+  }
+  .profile__container {
     flex-direction: column;
     align-items: center;
   }
@@ -63,6 +96,12 @@
   .profile__caption {
     text-align: center;
     margin: auto;
+    margin-top: 30px;
+  }
+
+  .profile__heading {
+    font-size: 1.777775em;
+    line-height: 1.3;
   }
 
   .profile__button-add {
@@ -72,17 +111,19 @@
   }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 460px) {
+  .profile__heading {
+    font-size: 1.6875rem;
+  }
+}
+
+@media screen and (max-width: 436px) {
   .profile {
     margin-top: 42px;
   }
 
   .profile__image {
     padding-left: 1px;
-  }
-
-  .profile__caption {
-    margin-top: 30px;
   }
 
   .profile__heading {
