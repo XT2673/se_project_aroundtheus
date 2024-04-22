@@ -43,7 +43,7 @@
 }
 
 .cards__button-favorite {
-  background-image: url(../../images/Buttons/Favorite-Button.svg);
+  background-image: url(../images/Buttons/Favorite-Button.svg);
   background-color: transparent;
   border: none;
   padding: 0;

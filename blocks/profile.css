@@ -31,7 +31,7 @@
 }
 
 .profile__button-edit {
-  background-image: url(../../images/Buttons/Edit-Button.svg);
+  background-image: url(../images/Buttons/Edit-Button.svg);
   background-color: transparent;
   border: none;
   padding: 0;
@@ -56,7 +56,7 @@
 }
 
 .profile__button-add {
-  background-image: url(../../images/Buttons/Add-Button.svg);
+  background-image: url(../images/Buttons/Add-Button.svg);
   background-color: transparent;
   border: none;
   padding: 0;
