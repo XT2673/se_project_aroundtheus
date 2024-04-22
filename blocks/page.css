@@ -14,21 +14,18 @@
   padding: 3.125% 15.625% 4.688%;
 }
 
-@media screen and (max-width: 896px) {
+@media screen and (max-width: 1024px) {
   .page__content {
-    padding-top: 28px;
+    padding-left: 7%;
+    padding-right: 7%;
   }
 }
 
 @media screen and (max-width: 768px) {
   .page__content {
-    padding-bottom: 36px;
+    padding: 28px 0 36px;
   }
 }
 
-@media screen and (max-width: 411px) {
-  .page__content {
-    width: 282px;
-    padding: 28px 19px 36px;
-  }
+@media screen and (max-width: 425px) {
 }

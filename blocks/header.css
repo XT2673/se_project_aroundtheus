@@ -10,20 +10,10 @@
   height: auto;
 }
 
-@media screen and (max-width: 1024px) {
-  .header__title {
-    max-width: 157px;
-  }
-}
-
 @media screen and (max-width: 768px) {
   .header__title {
-    max-width: 141px;
-  }
-}
-
-@media screen and (max-width: 425px) {
-  .header__title {
     max-width: 126px;
+    margin-left: 27px;
+    margin-bottom: 32px;
   }
 }
