@@ -26,7 +26,7 @@ Hey, everyone! Julian here with another project I built during my time in the Tr
 
 **[Sprint 3 Project](https://xt2673.github.io/se_project_aroundtheus/index.html)**
 
-**[Project Video]()**
+**[Project Video](https://1drv.ms/v/s!AskRe9vD_pUMl0ZJs1jI7umZirdJ?e=z52R3e)**
 
 So... what have we learned from this project?
 
