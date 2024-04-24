@@ -19,8 +19,12 @@
   margin: 22px auto 21px 30px;
 }
 
+.profile__header {
+  display: flex;
+  align-items: baseline;
+}
+
 .profile__heading {
-  display: inline-flex;
   max-width: 373px;
   font-size: 2.625rem;
   font-weight: 500;
@@ -29,6 +33,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  flex-grow: 1;
 }
 
 .profile__button-edit {
