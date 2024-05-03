@@ -47,3 +47,13 @@ _"Uh... that's not how that works.."_
 Oh... Well, then... I guess, uh... I'll just use it for good, then...
 
 ONTO THE NEXT LESSON!!
+
+**JavaScript!**
+
+I'm back with more updates! This time, we're adding JavaScript to the page. So exciting!
+
+_What is JavaScript?_
+
+From the powerful Wikipedia: "JavaScript, often abbreviated as JS, is a programming language and core technology of the Web, alongside HTML and CSS. 99% of websites use JavaScript on the client side for webpage behavior. Web browsers have a dedicated JavaScript engine that executes the client code."
+
+In my own words: Going back to the house building analogy I used in my video above, if HTML is the Rough-in and CSS is the Trim-out, JS is like programming the SmartHome device you most likely have in your new home. Every button you press on a page that opens up a mini window on the page? Animations? Those annoying ads that pop up when and where you least expect or even want them to? You have JavaScript to thank for that. No, don't boo just because I mentioned ads! Sheesh...
