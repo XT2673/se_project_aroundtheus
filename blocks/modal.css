@@ -1,5 +1,7 @@
 .modal {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
@@ -12,9 +14,11 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 666;
   padding: 19px;
+  transition: 0.3s linear;
 }
 .modal_opened {
-  display: flex;
+  visibility: visible;
+  opacity: 1;
 }
 .modal__container {
   box-sizing: border-box;
@@ -35,9 +39,9 @@
   background-image: url(../images/Buttons/Close-Button.svg);
   background-color: transparent;
   background-repeat: no-repeat;
-  background-size: contain;
-  width: 40px;
-  height: 40px;
+  background-size: cover;
+  width: 32px;
+  height: 32px;
   border: none;
   padding: 0;
   cursor: pointer;
@@ -88,22 +92,51 @@
   opacity: 80%;
 }
 
+.modal__container-preview {
+  margin: auto;
+  position: relative;
+}
+
+.modal__card-image {
+  max-height: 75vh;
+  max-width: 75vw;
+}
+
+.modal__caption {
+  color: white;
+  font-size: 12px;
+  line-height: 14.52px;
+  margin: 10px 0 0;
+  max-width: 291px;
+}
+
 @media screen and (max-width: 560px) {
   .modal__container {
     padding: 25px 22px;
   }
+
   .modal__close {
     left: calc(100% - 26px);
     bottom: calc(100% + 22px);
-    width: 26px;
-    height: 26px;
+    width: 20px;
+    height: 20px;
   }
+
+  .modal__close-mobile {
+    left: calc(100% + 5px);
+    bottom: calc(100% + 5px);
+    width: 24px;
+    height: 24px;
+  }
+
   .modal__heading {
     font-size: 18px;
   }
+
   .modal__form {
     margin-top: 75px;
   }
+
   .modal__save {
     margin-top: 15px;
   }

@@ -14,10 +14,30 @@
 }
 
 .cards__content {
+  position: relative;
   border-radius: 10px;
   overflow: hidden;
   width: 282px;
   background-color: white;
+  cursor: pointer;
+}
+
+.cards__delete-button {
+  background-image: url(../images/Buttons/Delete.svg);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  padding: 0;
+  height: 19px;
+  width: 18px;
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  transition: 0.3s linear;
+  cursor: pointer;
+}
+.cards__delete-button:hover {
+  opacity: 60%;
 }
 
 .cards__image {
@@ -53,6 +73,10 @@
   margin: 0;
   transition: 0.3s linear;
   cursor: pointer;
+}
+
+.cards__button-favorite_active {
+  background-image: url(../images/Buttons/Active-Favorite-Button.svg);
 }
 
 .cards__button-favorite:hover {

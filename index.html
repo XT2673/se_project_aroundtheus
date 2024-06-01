@@ -47,9 +47,9 @@
             </div>
             <button
               type="button"
-              aria-label="Add User"
+              aria-label="Add Card"
               class="profile__button-add"
-              id="profile-add-btn"
+              id="add-card-btn"
             ></button>
           </section>
           <section class="cards">
@@ -62,12 +62,13 @@
       </div>
     </div>
 
+    <!-- Edit Profile Modal -->
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
         <button
           type="button"
           class="modal__close"
-          id="modal-close-btn"
+          id="edit-profile-modal-close-btn"
         ></button>
         <p class="modal__heading">Edit Profile</p>
         <form class="modal__form">
@@ -76,23 +77,76 @@
             class="modal__input"
             name="heading"
             placeholder="Name"
-            id="modal-heading-input"
+            id="edit-profile-modal-heading-input"
           />
           <input
             type="text"
             class="modal__input"
             name="subheading"
             placeholder="Description"
-            id="modal-subheading-input"
+            id="edit-profile-modal-subheading-input"
           />
-          <button type="submit" class="modal__save" id="modal-submit">
-            Save
-          </button>
+          <button type="submit" class="modal__save">Save</button>
         </form>
       </div>
     </div>
-    <template id="card-template"
-      ><li class="cards__content">
+
+    <!-- Add Card Modal -->
+    <div class="modal" id="add-card-modal">
+      <div class="modal__container">
+        <button
+          type="button"
+          class="modal__close"
+          id="add-card-modal-close-btn"
+        ></button>
+        <p class="modal__heading">New Place</p>
+        <form class="modal__form">
+          <input
+            type="text"
+            class="modal__input"
+            name="Title"
+            placeholder="Title"
+            id="add-card-modal-title-input"
+          />
+          <input
+            type="text"
+            class="modal__input"
+            name="Url"
+            placeholder="Image URL"
+            id="add-card-modal-url-input"
+          />
+          <button type="submit" class="modal__save">Save</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Full Image Modal -->
+    <div class="modal" id="full-image-modal">
+      <div class="modal__container-preview">
+        <button
+          type="button"
+          class="modal__close modal__close-mobile"
+          id="image-modal-close-btn"
+        ></button>
+        <img
+          src="https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg"
+          ,
+          class="modal__card-image"
+          alt="Yosemite Valley"
+          id="full-image-card"
+        />
+        <p class="modal__caption" id="full-image-caption">Yosemite Park</p>
+      </div>
+    </div>
+
+    <!-- Card Template -->
+    <template id="card-template">
+      <li class="cards__content">
+        <button
+          type="button"
+          aria-label="Delete"
+          class="cards__delete-button"
+        ></button>
         <img src="" alt="" class="cards__image" />
         <div class="cards__caption">
           <h2 class="cards__title"></h2>
@@ -102,8 +156,10 @@
             class="cards__button-favorite"
             id="favorite-btn"
           ></button>
-        </div></li
-    ></template>
+        </div>
+      </li>
+    </template>
+
     <script src="./scripts/index.js"></script>
   </body>
 </html>
