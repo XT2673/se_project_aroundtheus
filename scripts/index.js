@@ -67,12 +67,13 @@ const cardsListEl = document.querySelector(".cards__list");
 const profileEditBtn = document.querySelector("#profile-edit-btn");
 const profileCloseBtn = profileEditModal.querySelector(".modal__close");
 const addCardBtn = document.querySelector("#add-card-btn");
-const addcardCloseBtn = addCardModal.querySelector(".modal__close");
+const addCardCloseBtn = addCardModal.querySelector(".modal__close");
 const imgCloseBtn = imgModal.querySelector(".modal__close");
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
 
+// Open/Close Modal
 function openModal(modal) {
   modal.classList.add("modal_opened");
 }
@@ -81,6 +82,7 @@ function closeModal(modal) {
   modal.classList.remove("modal_opened");
 }
 
+// Get Card Element Information
 function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".cards__image");
@@ -88,10 +90,12 @@ function getCardElement(data) {
   const favBtn = cardElement.querySelector(".cards__button-favorite");
   const deleteBtn = cardElement.querySelector(".cards__delete-button");
 
+  // Card Delete Button
   deleteBtn.addEventListener("click", () => {
     cardElement.remove();
   });
 
+  // Showing Full Image
   cardImageEl.addEventListener("click", () => {
     openModal(imgModal);
     imgFull.src = cardImageEl.src;
@@ -99,14 +103,12 @@ function getCardElement(data) {
     imgCaption.textContent = data.name;
   });
 
+  // Card 'Like/Favorite' Button
   favBtn.addEventListener("click", () => {
     favBtn.classList.toggle("cards__button-favorite_active");
   });
 
-  imgCloseBtn.addEventListener("click", () => {
-    closeModal(imgModal);
-  });
-
+  // This is the information to grab from the initial array/new cards to make a new card
   cardTitleEl.textContent = data.name;
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
@@ -118,6 +120,7 @@ function getCardElement(data) {
 /*                               Event Handlers                               */
 /* -------------------------------------------------------------------------- */
 
+// Edit Profile Submit Handler
 function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileHeading.textContent = profileHeadingInput.value;
@@ -125,6 +128,7 @@ function handleProfileEditSubmit(e) {
   closeModal(profileEditModal);
 }
 
+// Add New Card Submit Handler
 function handleAddCardSubmit(e) {
   e.preventDefault();
   const name = cardFormTitleInput.value;
@@ -166,6 +170,10 @@ addCardBtn.addEventListener("click", () => {
 
 addCardForm.addEventListener("submit", handleAddCardSubmit);
 
-addcardCloseBtn.addEventListener("click", () => {
+addCardCloseBtn.addEventListener("click", () => {
   closeModal(addCardModal);
+});
+
+imgCloseBtn.addEventListener("click", () => {
+  closeModal(imgModal);
 });

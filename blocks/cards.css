@@ -1,6 +1,7 @@
 .cards {
   font-weight: 900;
   color: black;
+  min-height: 100vh;
 }
 
 .cards__list {
