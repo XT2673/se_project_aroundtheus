@@ -133,6 +133,9 @@ function handleOverlayClick(e) {
     closeModal(e.target);
   }
 }
+// This should work as intended, now. I decided to follow up with adding and removing the event listener in the same way as the "Esc" key event listener.
+// This way, the event listener is removed when the modal is closed, and added when the modal is opened.
+// This should prevent any issues with the event listener being added multiple times and wasting resources.
 
 // "Esc" Key Close Modal
 function handleEscKey(e) {
