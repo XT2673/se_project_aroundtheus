@@ -33,6 +33,8 @@ const initialCards = [
 /*                                  Elements                                  */
 /* -------------------------------------------------------------------------- */
 
+/* --------------------------------- Modals --------------------------------- */
+
 // Edit Profile Modal
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileEditForm = profileEditModal.querySelector(".modal__form");
@@ -70,23 +72,6 @@ const addCardBtn = document.querySelector("#add-card-btn");
 const addCardCloseBtn = addCardModal.querySelector(".modal__close");
 const imgCloseBtn = imgModal.querySelector(".modal__close");
 
-// "Esc" Key Close Modal
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    const openedModal = document.querySelector(".modal_opened");
-    if (openedModal) {
-      closeModal(openedModal);
-    }
-  }
-});
-
-// Close Modal on Overlay Click
-document.addEventListener("mousedown", (e) => {
-  if (e.target.classList.contains("modal_opened")) {
-    closeModal(e.target);
-  }
-});
-
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
@@ -94,10 +79,14 @@ document.addEventListener("mousedown", (e) => {
 // Open/Close Modal
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  modal.addEventListener("keydown", handleEscKey);
+  document.addEventListener("mousedown", handleOverlayClick);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  modal.removeEventListener("keydown", handleEscKey);
+  document.removeEventListener("mousedown", handleOverlayClick);
 }
 
 // Get Card Element Information
@@ -137,6 +126,23 @@ function getCardElement(data) {
 /* -------------------------------------------------------------------------- */
 /*                               Event Handlers                               */
 /* -------------------------------------------------------------------------- */
+
+// Close Modal on Overlay Click
+function handleOverlayClick(e) {
+  if (e.target.classList.contains("modal_opened")) {
+    closeModal(e.target);
+  }
+}
+
+// "Esc" Key Close Modal
+function handleEscKey(e) {
+  if (e.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
+    if (openedModal) {
+      closeModal(openedModal);
+    }
+  }
+}
 
 // Edit Profile Submit Handler
 function handleProfileEditSubmit(e) {
