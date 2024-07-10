@@ -69,6 +69,24 @@ const profileCloseBtn = profileEditModal.querySelector(".modal__close");
 const addCardBtn = document.querySelector("#add-card-btn");
 const addCardCloseBtn = addCardModal.querySelector(".modal__close");
 const imgCloseBtn = imgModal.querySelector(".modal__close");
+
+// "Esc" Key Close Modal
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
+    if (openedModal) {
+      closeModal(openedModal);
+    }
+  }
+});
+
+// Close Modal on Overlay Click
+document.addEventListener("mousedown", (e) => {
+  if (e.target.classList.contains("modal_opened")) {
+    closeModal(e.target);
+  }
+});
+
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */

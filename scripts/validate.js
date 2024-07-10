@@ -1,7 +1,8 @@
 /* -------------------------------------------------------------------------- */
 /*                              Validation Object                             */
 /* -------------------------------------------------------------------------- */
-const config = {
+
+const validationConfig = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__save",
@@ -11,8 +12,9 @@ const config = {
 };
 
 /* -------------------------------------------------------------------------- */
-/*                        Input Error Toggle Functions                        */
+/*                            Input Error Functions                           */
 /* -------------------------------------------------------------------------- */
+
 function showInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
   inputEl.classList.add(inputErrorClass);
@@ -28,80 +30,68 @@ function hideInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
 }
 
 /* -------------------------------------------------------------------------- */
+/*                         Check Input Validity                               */
+/* -------------------------------------------------------------------------- */
+function checkInputValidity(formEl, inputEl, validationConfig) {
+  if (!inputEl.validity.valid) {
+    showInputError(formEl, inputEl, validationConfig);
+  } else {
+    hideInputError(formEl, inputEl, validationConfig);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
 /*                        Toggle Submit Button                                */
 /* -------------------------------------------------------------------------- */
-function toggleButtonState(
-  inputEls,
-  formEl,
-  { submitButtonSelector, inactiveButtonClass }
-) {
+function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
   let foundInvalid = false;
   inputEls.forEach((inputEl) => {
+    console.log(inputEl.validity.valid);
     if (!inputEl.validity.valid) {
       foundInvalid = true;
     }
   });
-
-  const buttonEl = formEl.querySelector(submitButtonSelector);
-
-  console.log("Button:", buttonEl);
-  console.log("Found Invalid:", foundInvalid);
-  console.log("Inactive Button Class:", inactiveButtonClass);
-
   if (foundInvalid) {
-    buttonEl.classList.add(inactiveButtonClass);
-    buttonEl.disabled = true;
+    submitButton.classList.add(inactiveButtonClass);
+    submitButton.disabled = true;
   } else {
-    buttonEl.classList.remove(inactiveButtonClass);
-    buttonEl.disabled = false;
+    submitButton.classList.remove(inactiveButtonClass);
+    submitButton.disabled = false;
   }
 }
 
 /* -------------------------------------------------------------------------- */
 /*                         Set Event Listener Function                        */
 /* -------------------------------------------------------------------------- */
-function setEventListeners(formEl, config) {
-  const { inputSelector } = config;
+function setEventListeners(formEl, validationConfig) {
+  const { inputSelector } = validationConfig;
+  const { submitButtonSelector } = validationConfig;
   const inputEls = [...formEl.querySelectorAll(inputSelector)];
-
-  // Initial state verification
-  inputEls.forEach((inputEl, index) => {
-    console.log(`Input ${index} valid: ${inputEl.validity.valid}`);
-  });
-
-  toggleButtonState(inputEls, formEl, config);
+  const submitButton = formEl.querySelector(submitButtonSelector);
 
   inputEls.forEach((inputEl) => {
-    inputEl.addEventListener("input", (e) => {
-      checkInputValidity(formEl, inputEl, config);
-      toggleButtonState(inputEls, formEl, config);
+    inputEl.addEventListener("input", () => {
+      checkInputValidity(formEl, inputEl, validationConfig);
+      toggleButtonState(inputEls, submitButton, validationConfig);
     });
   });
-}
-
-/* -------------------------------------------------------------------------- */
-/*                         Check Input Validity                               */
-/* -------------------------------------------------------------------------- */
-function checkInputValidity(formEl, inputEl, config) {
-  if (!inputEl.validity.valid) {
-    showInputError(formEl, inputEl, config);
-  } else {
-    hideInputError(formEl, inputEl, config);
-  }
 }
 
 /* -------------------------------------------------------------------------- */
 /*                         Enable Validation                                  */
 /* -------------------------------------------------------------------------- */
-function enableValidation(config) {
-  const formEls = [...document.querySelectorAll(config.formSelector)];
+function enableValidation(validationConfig) {
+  const { formSelector } = validationConfig;
+  const formEls = [...document.querySelectorAll(formSelector)];
   formEls.forEach((formEl) => {
     formEl.addEventListener("submit", (e) => {
       e.preventDefault();
     });
-    setEventListeners(formEl, config);
+    setEventListeners(formEl, validationConfig);
   });
 }
 
 /* ------------------------------ Validate it! ------------------------------ */
-enableValidation(config);
+document.addEventListener("DOMContentLoaded", function () {
+  enableValidation(validationConfig);
+});

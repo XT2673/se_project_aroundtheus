@@ -11,8 +11,12 @@
     <title>About the US</title>
   </head>
   <body>
+    <!-- ----------------------------------------------------------------------- -->
+    <!--                                Main Page                                -->
+    <!-- ----------------------------------------------------------------------- -->
     <div class="page">
       <div class="page__content">
+        <!-- ----------------------------- Header ------------------------------ -->
         <header class="header">
           <img
             src="./images/Around-the-US-White.svg"
@@ -20,7 +24,9 @@
             class="header__title"
           />
         </header>
+        <!-- ----------------------------- Content ----------------------------- -->
         <main class="content">
+          <!-- Profile -->
           <section class="profile">
             <div class="profile__container">
               <img
@@ -52,17 +58,23 @@
               id="add-card-btn"
             ></button>
           </section>
+          <!-- Cards -->
           <section class="cards">
             <ul class="cards__list"></ul>
           </section>
         </main>
+        <!-- ----------------------------- Footer ------------------------------ -->
         <footer class="footer">
           <p class="footer__title">&copy; 2022 Around The U.S.</p>
         </footer>
       </div>
     </div>
 
-    <!-- Edit Profile Modal -->
+    <!-- ----------------------------------------------------------------------- -->
+    <!--                                 Modals                                  -->
+    <!-- ----------------------------------------------------------------------- -->
+
+    <!-- ------------------------- Edit Profile Modal -------------------------- -->
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
         <button
@@ -71,7 +83,7 @@
           id="edit-profile-modal-close-btn"
         ></button>
         <h3 class="modal__heading">Edit Profile</h3>
-        <form class="modal__form">
+        <form id="edit-profile-form" class="modal__form">
           <label class="modal__label">
             <input
               type="text"
@@ -79,7 +91,7 @@
               name="heading"
               placeholder="Name"
               id="edit-profile-modal-heading-input"
-              required
+              required="required"
               minlength="2"
               maxlength="40"
             />
@@ -95,7 +107,7 @@
               name="subheading"
               placeholder="Description"
               id="edit-profile-modal-subheading-input"
-              required
+              required="required"
               minlength="2"
               maxlength="200"
             />
@@ -110,7 +122,8 @@
       </div>
     </div>
 
-    <!-- Add Card Modal -->
+    <!-- --------------------------- Add Card Modal ---------------------------- -->
+
     <div class="modal" id="add-card-modal">
       <div class="modal__container">
         <button
@@ -119,7 +132,7 @@
           id="add-card-modal-close-btn"
         ></button>
         <h3 class="modal__heading">New Place</h3>
-        <form class="modal__form">
+        <form id="add-card-form" class="modal__form">
           <label for="" class="modal__label"
             ><input
               type="text"
@@ -147,12 +160,18 @@
             </span
           ></label>
 
-          <button type="submit" class="modal__save">Save</button>
+          <button
+            type="submit"
+            disabled
+            class="modal__save modal__save_disabled"
+          >
+            Save
+          </button>
         </form>
       </div>
     </div>
 
-    <!-- Full Image Modal -->
+    <!-- -------------------------- Full Image Modal --------------------------- -->
     <div class="modal" id="full-image-modal">
       <div class="modal__container-preview">
         <button
@@ -171,7 +190,9 @@
       </div>
     </div>
 
-    <!-- Card Template -->
+    <!-- ----------------------------------------------------------------------- -->
+    <!--                              Card Template                              -->
+    <!-- ----------------------------------------------------------------------- -->
     <template id="card-template">
       <li class="cards__content">
         <button
@@ -191,8 +212,10 @@
         </div>
       </li>
     </template>
-    <!-- Scripts -->
-    <script defer src="./scripts/index.js"></script>
-    <script defer src="./scripts/validate.js"></script>
+    <!-- ----------------------------------------------------------------------- -->
+    <!--                                 Scripts                                 -->
+    <!-- ----------------------------------------------------------------------- -->
+    <script defer src="./scripts/index.js" type="module"></script>
+    <script defer src="./scripts/validate.js" type="module"></script>
   </body>
 </html>
