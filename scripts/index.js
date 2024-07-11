@@ -79,13 +79,13 @@ const imgCloseBtn = imgModal.querySelector(".modal__close");
 // Open/Close Modal
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  modal.addEventListener("keydown", handleEscKey);
+  document.addEventListener("keydown", handleEscKey);
   document.addEventListener("mousedown", handleOverlayClick);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  modal.removeEventListener("keydown", handleEscKey);
+  document.removeEventListener("keydown", handleEscKey);
   document.removeEventListener("mousedown", handleOverlayClick);
 }
 
