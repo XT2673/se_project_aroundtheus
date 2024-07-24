@@ -122,6 +122,7 @@ function closeModal(modal) {
     const formId = form.getAttribute("id");
     if (formId && formValidators && formValidators[formId]) {
       formValidators[formId].resetValidation();
+      form.reset();
     }
   }
 }
@@ -219,12 +220,6 @@ profileEditBtn.addEventListener("click", () => {
 // Profile Edit Form
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
-// // Profile Close Button
-// profileCloseBtn.addEventListener("click", () => {
-//   closeModal(profileEditModal);
-//   formValidators[profileForm.getAttribute("name")].resetValidation();
-// });
-
 /* ----------------------------- Add Card Modal ----------------------------- */
 
 // Add Card Button
@@ -234,18 +229,6 @@ addCardBtn.addEventListener("click", () => {
 
 // Add Card Form
 addCardForm.addEventListener("submit", handleAddCardSubmit);
-
-// // Add Card Close Button
-// addCardCloseBtn.addEventListener("click", () => {
-//   closeModal(addCardModal);
-// });
-
-/* ---------------------------- Full Image Modal ---------------------------- */
-
-// // Full Image Close Button
-// imgCloseBtn.addEventListener("click", () => {
-//   closeModal(imgModal);
-// });
 
 /* -------------------------------------------------------------------------- */
 /*                            Configure Validation                            */
