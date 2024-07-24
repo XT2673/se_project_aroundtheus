@@ -51,11 +51,15 @@ const validationConfig = {
 /*                                  Elements                                  */
 /* -------------------------------------------------------------------------- */
 
+/* ---------------------------------- Forms --------------------------------- */
+
+const profileEditForm = document.forms["edit-profile-form"];
+const addCardForm = document.forms["add-card-form"];
+
 /* --------------------------------- Modals --------------------------------- */
 
 // Edit Profile Modal
 const profileEditModal = document.querySelector("#profile-edit-modal");
-const profileEditForm = profileEditModal.querySelector("#edit-profile-form");
 const profileHeading = document.querySelector("#profile-heading");
 const profileSubheading = document.querySelector("#profile-subheading");
 const profileHeadingInput = profileEditModal.querySelector(
@@ -67,7 +71,6 @@ const profileSubheadingInput = profileEditModal.querySelector(
 
 // Add Card Modal
 const addCardModal = document.querySelector("#add-card-modal");
-const addCardForm = addCardModal.querySelector("#add-card-form");
 const cardFormTitleInput = addCardForm.querySelector(
   "#add-card-modal-title-input"
 );
@@ -84,11 +87,9 @@ const cardTemplate =
 const cardsListEl = document.querySelector(".cards__list");
 
 // Modal Buttons
+const closeButtons = document.querySelectorAll(".modal__close");
 const profileEditBtn = document.querySelector("#profile-edit-btn");
-const profileCloseBtn = profileEditModal.querySelector(".modal__close");
 const addCardBtn = document.querySelector("#add-card-btn");
-const addCardCloseBtn = addCardModal.querySelector(".modal__close");
-const imgCloseBtn = imgModal.querySelector(".modal__close");
 
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
@@ -115,6 +116,14 @@ function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscKey);
   document.removeEventListener("mousedown", handleOverlayClick);
+
+  const form = modal.querySelector(".modal__form");
+  if (form) {
+    const formId = form.getAttribute("id");
+    if (formId && formValidators && formValidators[formId]) {
+      formValidators[formId].resetValidation();
+    }
+  }
 }
 
 /* --------------------------- Create/Add New Card -------------------------- */
@@ -156,6 +165,14 @@ function handleEscKey(e) {
     }
   }
 }
+
+// Close Modal Buttons
+closeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const modal = button.closest(".modal");
+    closeModal(modal);
+  });
+});
 
 /* ----------------------------- Sumbit Handlers ---------------------------- */
 
@@ -202,10 +219,11 @@ profileEditBtn.addEventListener("click", () => {
 // Profile Edit Form
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
-// Profile Close Button
-profileCloseBtn.addEventListener("click", () => {
-  closeModal(profileEditModal);
-});
+// // Profile Close Button
+// profileCloseBtn.addEventListener("click", () => {
+//   closeModal(profileEditModal);
+//   formValidators[profileForm.getAttribute("name")].resetValidation();
+// });
 
 /* ----------------------------- Add Card Modal ----------------------------- */
 
@@ -217,17 +235,17 @@ addCardBtn.addEventListener("click", () => {
 // Add Card Form
 addCardForm.addEventListener("submit", handleAddCardSubmit);
 
-// Add Card Close Button
-addCardCloseBtn.addEventListener("click", () => {
-  closeModal(addCardModal);
-});
+// // Add Card Close Button
+// addCardCloseBtn.addEventListener("click", () => {
+//   closeModal(addCardModal);
+// });
 
 /* ---------------------------- Full Image Modal ---------------------------- */
 
-// Full Image Close Button
-imgCloseBtn.addEventListener("click", () => {
-  closeModal(imgModal);
-});
+// // Full Image Close Button
+// imgCloseBtn.addEventListener("click", () => {
+//   closeModal(imgModal);
+// });
 
 /* -------------------------------------------------------------------------- */
 /*                            Configure Validation                            */

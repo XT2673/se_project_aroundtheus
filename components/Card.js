@@ -37,6 +37,7 @@ export default class Card {
 
   _handleDeleteClick() {
     this._cardElement.remove();
+    this._cardElement = null;
   }
 
   _getCardElement() {
