@@ -1,7 +1,14 @@
 /* -------------------------------------------------------------------------- */
-/*                                 Card Array                                 */
+/*                               import Scripts                               */
+/* -------------------------------------------------------------------------- */
+import Card from "../components/Card.js";
+
+import FormValidator from "../components/FormValidator.js";
+/* -------------------------------------------------------------------------- */
+/*                                   Objects                                  */
 /* -------------------------------------------------------------------------- */
 
+/* ---------------------------------- Card ---------------------------------- */
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -29,6 +36,17 @@ const initialCards = [
   },
 ];
 
+/* ----------------------- Valididation Configuration ----------------------- */
+
+const validationConfig = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__save",
+  inactiveButtonClass: "modal__save_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
 /* -------------------------------------------------------------------------- */
 /*                                  Elements                                  */
 /* -------------------------------------------------------------------------- */
@@ -37,7 +55,7 @@ const initialCards = [
 
 // Edit Profile Modal
 const profileEditModal = document.querySelector("#profile-edit-modal");
-const profileEditForm = profileEditModal.querySelector(".modal__form");
+const profileEditForm = profileEditModal.querySelector("#edit-profile-form");
 const profileHeading = document.querySelector("#profile-heading");
 const profileSubheading = document.querySelector("#profile-subheading");
 const profileHeadingInput = profileEditModal.querySelector(
@@ -49,7 +67,7 @@ const profileSubheadingInput = profileEditModal.querySelector(
 
 // Add Card Modal
 const addCardModal = document.querySelector("#add-card-modal");
-const addCardForm = addCardModal.querySelector(".modal__form");
+const addCardForm = addCardModal.querySelector("#add-card-form");
 const cardFormTitleInput = addCardForm.querySelector(
   "#add-card-modal-title-input"
 );
@@ -76,56 +94,47 @@ const imgCloseBtn = imgModal.querySelector(".modal__close");
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
 
-// Open/Close Modal
+/* ---------------------------- Initialize Cards ---------------------------- */
+
+initialCards.forEach((data) => {
+  const cardElement = createCard(data);
+  cardsListEl.append(cardElement);
+});
+
+/* ---------------------------- Open/Close Modal ---------------------------- */
+
+// Open Modal
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscKey);
   document.addEventListener("mousedown", handleOverlayClick);
 }
 
+// Close Modal
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscKey);
   document.removeEventListener("mousedown", handleOverlayClick);
 }
 
-// Get Card Element Information
-function getCardElement(data) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImageEl = cardElement.querySelector(".cards__image");
-  const cardTitleEl = cardElement.querySelector(".cards__title");
-  const favBtn = cardElement.querySelector(".cards__button-favorite");
-  const deleteBtn = cardElement.querySelector(".cards__delete-button");
+/* --------------------------- Create/Add New Card -------------------------- */
 
-  // Card Delete Button
-  deleteBtn.addEventListener("click", () => {
-    cardElement.remove();
-  });
+// Create New Card Element
+function createCard(item) {
+  const card = new Card(item, "#card-template", handleImgClick);
+  return card.getCardElement();
+}
 
-  // Showing Full Image
-  cardImageEl.addEventListener("click", () => {
-    openModal(imgModal);
-    imgFull.src = cardImageEl.src;
-    imgFull.alt = cardImageEl.alt;
-    imgCaption.textContent = data.name;
-  });
-
-  // Card 'Like/Favorite' Button
-  favBtn.addEventListener("click", () => {
-    favBtn.classList.toggle("cards__button-favorite_active");
-  });
-
-  // This is the information to grab from the initial array/new cards to make a new card
-  cardTitleEl.textContent = data.name;
-  cardImageEl.src = data.link;
-  cardImageEl.alt = data.name;
-
-  return cardElement;
+// Add New Card to DOM
+function addCard(card) {
+  cardsListEl.prepend(card);
 }
 
 /* -------------------------------------------------------------------------- */
 /*                               Event Handlers                               */
 /* -------------------------------------------------------------------------- */
+
+/* -------------------------- Modal Close Handlers -------------------------- */
 
 // Close Modal on Overlay Click
 function handleOverlayClick(e) {
@@ -133,6 +142,7 @@ function handleOverlayClick(e) {
     closeModal(e.target);
   }
 }
+
 // This should work as intended, now. I decided to follow up with adding and removing the event listener in the same way as the "Esc" key event listener.
 // This way, the event listener is removed when the modal is closed, and added when the modal is opened.
 // This should prevent any issues with the event listener being added multiple times and wasting resources.
@@ -147,6 +157,8 @@ function handleEscKey(e) {
   }
 }
 
+/* ----------------------------- Sumbit Handlers ---------------------------- */
+
 // Edit Profile Submit Handler
 function handleProfileEditSubmit(e) {
   e.preventDefault();
@@ -160,47 +172,80 @@ function handleAddCardSubmit(e) {
   e.preventDefault();
   const name = cardFormTitleInput.value;
   const link = cardFormUrlInput.value;
-  const cardElement = getCardElement({
-    name,
-    link,
-  });
-  cardsListEl.prepend(cardElement);
+  addCard(createCard({ name, link }));
   addCardForm.reset();
   closeModal(addCardModal);
 }
+
+/* -------------------------- Image Preview Handler ------------------------- */
+
+function handleImgClick(data) {
+  openModal(imgModal);
+  imgFull.src = data.link;
+  imgFull.alt = data.name;
+  imgCaption.textContent = data.name;
+}
+
 /* -------------------------------------------------------------------------- */
 /*                               Event Listeners                              */
 /* -------------------------------------------------------------------------- */
 
-initialCards.forEach((data) => {
-  const cardElement = getCardElement(data);
-  cardsListEl.append(cardElement);
-});
+/* --------------------------- Edit Profile Modal --------------------------- */
 
-// Edit Profile Modal
+// Profile Edit Button
 profileEditBtn.addEventListener("click", () => {
   profileHeadingInput.value = profileHeading.textContent.trim();
   profileSubheadingInput.value = profileSubheading.textContent.trim();
   openModal(profileEditModal);
 });
 
+// Profile Edit Form
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
+// Profile Close Button
 profileCloseBtn.addEventListener("click", () => {
   closeModal(profileEditModal);
 });
 
-// Add Card Modal
+/* ----------------------------- Add Card Modal ----------------------------- */
+
+// Add Card Button
 addCardBtn.addEventListener("click", () => {
   openModal(addCardModal);
 });
 
+// Add Card Form
 addCardForm.addEventListener("submit", handleAddCardSubmit);
 
+// Add Card Close Button
 addCardCloseBtn.addEventListener("click", () => {
   closeModal(addCardModal);
 });
 
+/* ---------------------------- Full Image Modal ---------------------------- */
+
+// Full Image Close Button
 imgCloseBtn.addEventListener("click", () => {
   closeModal(imgModal);
 });
+
+/* -------------------------------------------------------------------------- */
+/*                            Configure Validation                            */
+/* -------------------------------------------------------------------------- */
+
+/* ------------------------- Enable Form Validation ------------------------- */
+
+const formValidators = {};
+
+function enableValidation(validationConfig) {
+  const { formSelector } = validationConfig;
+  const formEls = [...document.querySelectorAll(formSelector)];
+  formEls.forEach((formEl) => {
+    const validator = new FormValidator(validationConfig, formEl);
+    const formId = formEl.getAttribute("id");
+    formValidators[formId] = validator;
+    validator.enableValidation();
+  });
+}
+
+enableValidation(validationConfig);
