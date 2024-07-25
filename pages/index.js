@@ -51,8 +51,19 @@ const validationConfig = {
 /*                                  Elements                                  */
 /* -------------------------------------------------------------------------- */
 
-/* ---------------------------------- Forms --------------------------------- */
+/* ----------------------------- Initialization ----------------------------- */
 
+// Store Initial Form Values
+const initialFormValues = {};
+
+// Store Form Validators
+const formValidators = {};
+
+const modal = document.querySelector(".modal");
+const form = modal.querySelector(".modal__form");
+const formId = form.getAttribute("id");
+
+/* ---------------------------------- Forms --------------------------------- */
 const profileEditForm = document.forms["edit-profile-form"];
 const addCardForm = document.forms["add-card-form"];
 
@@ -95,12 +106,22 @@ const addCardBtn = document.querySelector("#add-card-btn");
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
 
-/* ---------------------------- Initialize Cards ---------------------------- */
+/* ----------------------------- Initializations ---------------------------- */
 
+// Populate Initial Cards
 initialCards.forEach((data) => {
   const cardElement = createCard(data);
   cardsListEl.append(cardElement);
 });
+
+// Store Initial Form Values
+function storeInitialValues(formId, formElement) {
+  const values = {};
+  formElement.querySelectorAll("input, textarea").forEach((input) => {
+    values[input.name] = input.value;
+  });
+  initialFormValues[formId] = values;
+}
 
 /* ---------------------------- Open/Close Modal ---------------------------- */
 
@@ -109,6 +130,15 @@ function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscKey);
   document.addEventListener("mousedown", handleOverlayClick);
+
+  if (form) {
+    if (formId && !initialFormValues[formId]) {
+      storeInitialValues(formId, form);
+    }
+    if (formValidators[formId]) {
+      formValidators[formId].resetValidation();
+    }
+  }
 }
 
 // Close Modal
@@ -117,13 +147,10 @@ function closeModal(modal) {
   document.removeEventListener("keydown", handleEscKey);
   document.removeEventListener("mousedown", handleOverlayClick);
 
-  const form = modal.querySelector(".modal__form");
-  if (form) {
-    const formId = form.getAttribute("id");
-    if (formId && formValidators && formValidators[formId]) {
-      formValidators[formId].resetValidation();
-      form.reset();
-    }
+  resetForm(modal);
+
+  if (formId && formValidators[formId]) {
+    formValidators[formId].resetValidation();
   }
 }
 
@@ -140,6 +167,29 @@ function addCard(card) {
   cardsListEl.prepend(card);
 }
 
+/* --------------------- Reset Form Imputs and Validity --------------------- */
+function resetForm() {
+  if (!form) return;
+
+  if (!formId || !initialFormValues[formId]) return;
+
+  // Restore initial values
+  const initialValues = initialFormValues[formId];
+  form.reset();
+  form.querySelectorAll("input, textarea").forEach((input) => {
+    if (initialValues[input.name] !== undefined) {
+      input.value = initialValues[input.name];
+    }
+
+    input.dispatchEvent(new Event("input"));
+  });
+
+  if (formValidators && formValidators[formId]) {
+    formValidators[formId].resetValidation();
+    formValidators[formId]._toggleButtonState();
+  }
+}
+
 /* -------------------------------------------------------------------------- */
 /*                               Event Handlers                               */
 /* -------------------------------------------------------------------------- */
@@ -152,10 +202,6 @@ function handleOverlayClick(e) {
     closeModal(e.target);
   }
 }
-
-// This should work as intended, now. I decided to follow up with adding and removing the event listener in the same way as the "Esc" key event listener.
-// This way, the event listener is removed when the modal is closed, and added when the modal is opened.
-// This should prevent any issues with the event listener being added multiple times and wasting resources.
 
 // "Esc" Key Close Modal
 function handleEscKey(e) {
@@ -191,7 +237,6 @@ function handleAddCardSubmit(e) {
   const name = cardFormTitleInput.value;
   const link = cardFormUrlInput.value;
   addCard(createCard({ name, link }));
-  addCardForm.reset();
   closeModal(addCardModal);
 }
 
@@ -214,6 +259,11 @@ function handleImgClick(data) {
 profileEditBtn.addEventListener("click", () => {
   profileHeadingInput.value = profileHeading.textContent.trim();
   profileSubheadingInput.value = profileSubheading.textContent.trim();
+
+  if (formId) {
+    storeInitialValues(formId, form);
+  }
+
   openModal(profileEditModal);
 });
 
@@ -224,6 +274,8 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 // Add Card Button
 addCardBtn.addEventListener("click", () => {
+  cardFormTitleInput.value = "";
+  cardFormUrlInput.value = "";
   openModal(addCardModal);
 });
 
@@ -235,8 +287,6 @@ addCardForm.addEventListener("submit", handleAddCardSubmit);
 /* -------------------------------------------------------------------------- */
 
 /* ------------------------- Enable Form Validation ------------------------- */
-
-const formValidators = {};
 
 function enableValidation(validationConfig) {
   const { formSelector } = validationConfig;
