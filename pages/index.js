@@ -126,10 +126,9 @@ function closeModal(modal) {
   document.removeEventListener("mousedown", handleOverlayClick);
 }
 
-/* --------------------- Reset Form Imputs and Validity --------------------- */
+/* --------------------------- Reset Form Validity -------------------------- */
 
-function resetForm(modal) {
-  const form = modal.querySelector(".modal__form");
+function resetFormValidation(form) {
   const formId = form.getAttribute("id");
   formValidators[formId].resetValidation();
 }
@@ -219,7 +218,7 @@ profileEditBtn.addEventListener("click", () => {
   profileSubheadingInput.value = profileSubheading.textContent.trim();
 
   openModal(profileEditModal);
-  resetForm(profileEditModal);
+  resetFormValidation(profileEditForm);
 });
 
 // Profile Edit Form
