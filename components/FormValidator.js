@@ -79,13 +79,5 @@ export default class FormValidator {
     });
 
     this._toggleButtonState();
-
-    const isFormValid = this._form.checkValidity();
-
-    if (isFormValid) {
-      this._submitButton.removeAttribute("disabled");
-    } else {
-      this._submitButton.setAttribute("disabled", true);
-    }
   }
 }

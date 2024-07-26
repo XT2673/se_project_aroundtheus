@@ -59,10 +59,6 @@ const initialFormValues = {};
 // Store Form Validators
 const formValidators = {};
 
-const modal = document.querySelector(".modal");
-const form = modal.querySelector(".modal__form");
-const formId = form.getAttribute("id");
-
 /* ---------------------------------- Forms --------------------------------- */
 const profileEditForm = document.forms["edit-profile-form"];
 const addCardForm = document.forms["add-card-form"];
@@ -114,15 +110,6 @@ initialCards.forEach((data) => {
   cardsListEl.append(cardElement);
 });
 
-// Store Initial Form Values
-function storeInitialValues(formId, formElement) {
-  const values = {};
-  formElement.querySelectorAll("input, textarea").forEach((input) => {
-    values[input.name] = input.value;
-  });
-  initialFormValues[formId] = values;
-}
-
 /* ---------------------------- Open/Close Modal ---------------------------- */
 
 // Open Modal
@@ -130,15 +117,6 @@ function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscKey);
   document.addEventListener("mousedown", handleOverlayClick);
-
-  if (form) {
-    if (formId && !initialFormValues[formId]) {
-      storeInitialValues(formId, form);
-    }
-    if (formValidators[formId]) {
-      formValidators[formId].resetValidation();
-    }
-  }
 }
 
 // Close Modal
@@ -146,12 +124,14 @@ function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscKey);
   document.removeEventListener("mousedown", handleOverlayClick);
+}
 
-  resetForm(modal);
+/* --------------------- Reset Form Imputs and Validity --------------------- */
 
-  if (formId && formValidators[formId]) {
-    formValidators[formId].resetValidation();
-  }
+function resetForm(modal) {
+  const form = modal.querySelector(".modal__form");
+  const formId = form.getAttribute("id");
+  formValidators[formId].resetValidation();
 }
 
 /* --------------------------- Create/Add New Card -------------------------- */
@@ -165,29 +145,6 @@ function createCard(item) {
 // Add New Card to DOM
 function addCard(card) {
   cardsListEl.prepend(card);
-}
-
-/* --------------------- Reset Form Imputs and Validity --------------------- */
-function resetForm() {
-  if (!form) return;
-
-  if (!formId || !initialFormValues[formId]) return;
-
-  // Restore initial values
-  const initialValues = initialFormValues[formId];
-  form.reset();
-  form.querySelectorAll("input, textarea").forEach((input) => {
-    if (initialValues[input.name] !== undefined) {
-      input.value = initialValues[input.name];
-    }
-
-    input.dispatchEvent(new Event("input"));
-  });
-
-  if (formValidators && formValidators[formId]) {
-    formValidators[formId].resetValidation();
-    formValidators[formId]._toggleButtonState();
-  }
 }
 
 /* -------------------------------------------------------------------------- */
@@ -237,6 +194,7 @@ function handleAddCardSubmit(e) {
   const name = cardFormTitleInput.value;
   const link = cardFormUrlInput.value;
   addCard(createCard({ name, link }));
+  e.target.reset();
   closeModal(addCardModal);
 }
 
@@ -260,11 +218,8 @@ profileEditBtn.addEventListener("click", () => {
   profileHeadingInput.value = profileHeading.textContent.trim();
   profileSubheadingInput.value = profileSubheading.textContent.trim();
 
-  if (formId) {
-    storeInitialValues(formId, form);
-  }
-
   openModal(profileEditModal);
+  resetForm(profileEditModal);
 });
 
 // Profile Edit Form
@@ -274,8 +229,6 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 // Add Card Button
 addCardBtn.addEventListener("click", () => {
-  cardFormTitleInput.value = "";
-  cardFormUrlInput.value = "";
   openModal(addCardModal);
 });
 
