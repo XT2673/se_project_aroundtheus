@@ -7,48 +7,13 @@ import Section from "../components/Section.js";
 import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
+import "../pages/index.css";
+import { initialCards, validationConfig } from "../utils/constants.js";
+
 /* -------------------------------------------------------------------------- */
 /*                                   Objects                                  */
 /* -------------------------------------------------------------------------- */
-
-/* ---------------------------------- Card ---------------------------------- */
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-  },
-];
-
-/* ----------------------- Valididation Configuration ----------------------- */
-
-const validationConfig = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__save",
-  inactiveButtonClass: "modal__save_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
 
 /* -------------------------------------------------------------------------- */
 /*                                  Elements                                  */
@@ -109,13 +74,13 @@ const imagePopup = new PopupWithImage("#full-image-modal");
 // Profile Modal
 const profilePopup = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
-  handleFormSubmit,
+  handleProfileEditSubmit,
 });
 
 // Add Card Modal
 const addCardPopup = new PopupWithForm({
   popupSelector: "#add-card-modal",
-  handleFormSubmit,
+  handleAddCardSubmit,
 });
 
 // Card Section
@@ -207,13 +172,13 @@ function addCard(card) {
 //   }
 // }
 
-// Close Modal Buttons
-closeButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const modal = button.closest(".modal");
-    closeModal(modal);
-  });
-});
+// // Close Modal Buttons
+// closeButtons.forEach((button) => {
+//   button.addEventListener("click", () => {
+//     const modal = button.closest(".modal");
+//     closeModal(modal);
+//   });
+// });
 
 /* ----------------------------- Sumbit Handlers ---------------------------- */
 
