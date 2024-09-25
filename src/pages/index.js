@@ -2,8 +2,11 @@
 /*                               import Scripts                               */
 /* -------------------------------------------------------------------------- */
 import Card from "../components/Card.js";
-
 import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
+import Popup from "../components/Popup.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 /* -------------------------------------------------------------------------- */
 /*                                   Objects                                  */
 /* -------------------------------------------------------------------------- */
@@ -98,6 +101,41 @@ const closeButtons = document.querySelectorAll(".modal__close");
 const profileEditBtn = document.querySelector("#profile-edit-btn");
 const addCardBtn = document.querySelector("#add-card-btn");
 
+/* ----------------------------- Instantiations ----------------------------- */
+
+// Image Modal
+const imagePopup = new PopupWithImage("#full-image-modal");
+
+// Profile Modal
+const profilePopup = new PopupWithForm({
+  popupSelector: "#profile-edit-modal",
+  handleFormSubmit,
+});
+
+// Add Card Modal
+const addCardPopup = new PopupWithForm({
+  popupSelector: "#add-card-modal",
+  handleFormSubmit,
+});
+
+// Card Section
+const section = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const card = createCard(item);
+      section.addItem(card);
+    },
+  },
+  ".cards__list"
+);
+
+// User Info
+const userInfo = new UserInfo({
+  name: ".profile__heading",
+  about: ".profile__subheading",
+});
+
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
@@ -112,19 +150,19 @@ initialCards.forEach((data) => {
 
 /* ---------------------------- Open/Close Modal ---------------------------- */
 
-// Open Modal
-function openModal(modal) {
-  modal.classList.add("modal_opened");
-  document.addEventListener("keydown", handleEscKey);
-  document.addEventListener("mousedown", handleOverlayClick);
-}
+// // Open Modal
+// function openModal(modal) {
+//   modal.classList.add("modal_opened");
+//   document.addEventListener("keydown", handleEscKey);
+//   document.addEventListener("mousedown", handleOverlayClick);
+// }
 
-// Close Modal
-function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", handleEscKey);
-  document.removeEventListener("mousedown", handleOverlayClick);
-}
+// // Close Modal
+// function closeModal(modal) {
+//   modal.classList.remove("modal_opened");
+//   document.removeEventListener("keydown", handleEscKey);
+//   document.removeEventListener("mousedown", handleOverlayClick);
+// }
 
 /* --------------------------- Reset Form Validity -------------------------- */
 
@@ -152,22 +190,22 @@ function addCard(card) {
 
 /* -------------------------- Modal Close Handlers -------------------------- */
 
-// Close Modal on Overlay Click
-function handleOverlayClick(e) {
-  if (e.target.classList.contains("modal_opened")) {
-    closeModal(e.target);
-  }
-}
+// // Close Modal on Overlay Click
+// function handleOverlayClick(e) {
+//   if (e.target.classList.contains("modal_opened")) {
+//     closeModal(e.target);
+//   }
+// }
 
-// "Esc" Key Close Modal
-function handleEscKey(e) {
-  if (e.key === "Escape") {
-    const openedModal = document.querySelector(".modal_opened");
-    if (openedModal) {
-      closeModal(openedModal);
-    }
-  }
-}
+// // "Esc" Key Close Modal
+// function handleEscKey(e) {
+//   if (e.key === "Escape") {
+//     const openedModal = document.querySelector(".modal_opened");
+//     if (openedModal) {
+//       closeModal(openedModal);
+//     }
+//   }
+// }
 
 // Close Modal Buttons
 closeButtons.forEach((button) => {
@@ -217,7 +255,7 @@ profileEditBtn.addEventListener("click", () => {
   profileHeadingInput.value = profileHeading.textContent.trim();
   profileSubheadingInput.value = profileSubheading.textContent.trim();
 
-  openModal(profileEditModal);
+  // openModal(profileEditModal);
   resetFormValidation(profileEditForm);
 });
 
@@ -233,6 +271,11 @@ addCardBtn.addEventListener("click", () => {
 
 // Add Card Form
 addCardForm.addEventListener("submit", handleAddCardSubmit);
+
+/* --------------------------------- Popups --------------------------------- */
+
+// Full Image Popup
+imagePopup.setEventListeners();
 
 /* -------------------------------------------------------------------------- */
 /*                            Configure Validation                            */
