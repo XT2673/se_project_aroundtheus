@@ -7,17 +7,11 @@ export default class Popup {
 
   open() {
     this._popupElement.classList.add("modal_opened");
-    this._popupElement
-      .querySelector(".modal__overlay")
-      .classList.add("modal__overlay_active");
     document.addEventListener("keydown", this._handleEscClose);
   }
 
   close() {
     this._popupElement.classList.remove("modal_opened");
-    this._popupElement
-      .querySelector(".modal__overlay")
-      .classList.remove("modal__overlay_active");
     document.removeEventListener("keydown", this._handleEscClose);
   }
 
@@ -28,9 +22,7 @@ export default class Popup {
   };
 
   setEventListeners() {
-    const closeButton = this._popupElement.querySelector(
-      ".modal__close-button"
-    );
+    const closeButton = this._popupElement.querySelector(".modal__close");
     closeButton.addEventListener("click", () => {
       this.close();
     });

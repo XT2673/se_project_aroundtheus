@@ -12,10 +12,6 @@ import "../pages/index.css";
 import { initialCards, validationConfig } from "../utils/constants.js";
 
 /* -------------------------------------------------------------------------- */
-/*                                   Objects                                  */
-/* -------------------------------------------------------------------------- */
-
-/* -------------------------------------------------------------------------- */
 /*                                  Elements                                  */
 /* -------------------------------------------------------------------------- */
 
@@ -115,19 +111,19 @@ initialCards.forEach((data) => {
 
 /* ---------------------------- Open/Close Modal ---------------------------- */
 
-// // Open Modal
-// function openModal(modal) {
-//   modal.classList.add("modal_opened");
-//   document.addEventListener("keydown", handleEscKey);
-//   document.addEventListener("mousedown", handleOverlayClick);
-// }
+// Open Modal
+function openModal(modal) {
+  modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscKey);
+  document.addEventListener("mousedown", handleOverlayClick);
+}
 
-// // Close Modal
-// function closeModal(modal) {
-//   modal.classList.remove("modal_opened");
-//   document.removeEventListener("keydown", handleEscKey);
-//   document.removeEventListener("mousedown", handleOverlayClick);
-// }
+// Close Modal
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEscKey);
+  document.removeEventListener("mousedown", handleOverlayClick);
+}
 
 /* --------------------------- Reset Form Validity -------------------------- */
 
@@ -155,30 +151,30 @@ function addCard(card) {
 
 /* -------------------------- Modal Close Handlers -------------------------- */
 
-// // Close Modal on Overlay Click
-// function handleOverlayClick(e) {
-//   if (e.target.classList.contains("modal_opened")) {
-//     closeModal(e.target);
-//   }
-// }
+// Close Modal on Overlay Click
+function handleOverlayClick(e) {
+  if (e.target.classList.contains("modal_opened")) {
+    closeModal(e.target);
+  }
+}
 
-// // "Esc" Key Close Modal
-// function handleEscKey(e) {
-//   if (e.key === "Escape") {
-//     const openedModal = document.querySelector(".modal_opened");
-//     if (openedModal) {
-//       closeModal(openedModal);
-//     }
-//   }
-// }
+// "Esc" Key Close Modal
+function handleEscKey(e) {
+  if (e.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
+    if (openedModal) {
+      closeModal(openedModal);
+    }
+  }
+}
 
-// // Close Modal Buttons
-// closeButtons.forEach((button) => {
-//   button.addEventListener("click", () => {
-//     const modal = button.closest(".modal");
-//     closeModal(modal);
-//   });
-// });
+// Close Modal Buttons
+closeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const modal = button.closest(".modal");
+    closeModal(modal);
+  });
+});
 
 /* ----------------------------- Sumbit Handlers ---------------------------- */
 
