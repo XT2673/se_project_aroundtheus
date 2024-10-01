@@ -72,12 +72,14 @@ const profilePopup = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
   handleProfileEditSubmit,
 });
+profilePopup.setEventListeners();
 
 // Add Card Modal
 const addCardPopup = new PopupWithForm({
   popupSelector: "#add-card-modal",
   handleAddCardSubmit,
 });
+addCardPopup.setEventListeners();
 
 // Card Section
 const section = new Section(
@@ -109,22 +111,6 @@ initialCards.forEach((data) => {
   cardsListEl.append(cardElement);
 });
 
-/* ---------------------------- Open/Close Modal ---------------------------- */
-
-// Open Modal
-function openModal(modal) {
-  modal.classList.add("modal_opened");
-  document.addEventListener("keydown", handleEscKey);
-  document.addEventListener("mousedown", handleOverlayClick);
-}
-
-// Close Modal
-function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", handleEscKey);
-  document.removeEventListener("mousedown", handleOverlayClick);
-}
-
 /* --------------------------- Reset Form Validity -------------------------- */
 
 function resetFormValidation(form) {
@@ -149,33 +135,6 @@ function addCard(card) {
 /*                               Event Handlers                               */
 /* -------------------------------------------------------------------------- */
 
-/* -------------------------- Modal Close Handlers -------------------------- */
-
-// Close Modal on Overlay Click
-function handleOverlayClick(e) {
-  if (e.target.classList.contains("modal_opened")) {
-    closeModal(e.target);
-  }
-}
-
-// "Esc" Key Close Modal
-function handleEscKey(e) {
-  if (e.key === "Escape") {
-    const openedModal = document.querySelector(".modal_opened");
-    if (openedModal) {
-      closeModal(openedModal);
-    }
-  }
-}
-
-// Close Modal Buttons
-closeButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const modal = button.closest(".modal");
-    closeModal(modal);
-  });
-});
-
 /* ----------------------------- Sumbit Handlers ---------------------------- */
 
 // Edit Profile Submit Handler
@@ -183,7 +142,7 @@ function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileHeading.textContent = profileHeadingInput.value;
   profileSubheading.textContent = profileSubheadingInput.value;
-  closeModal(profileEditModal);
+  profilePopup.close(profileEditModal);
 }
 
 // Add New Card Submit Handler
@@ -193,13 +152,13 @@ function handleAddCardSubmit(e) {
   const link = cardFormUrlInput.value;
   addCard(createCard({ name, link }));
   e.target.reset();
-  closeModal(addCardModal);
+  addCardPopup.close(addCardModal);
 }
 
 /* -------------------------- Image Preview Handler ------------------------- */
 
 function handleImgClick(data) {
-  openModal(imgModal);
+  imagePopup.open(imgModal);
   imgFull.src = data.link;
   imgFull.alt = data.name;
   imgCaption.textContent = data.name;
@@ -216,7 +175,7 @@ profileEditBtn.addEventListener("click", () => {
   profileHeadingInput.value = profileHeading.textContent.trim();
   profileSubheadingInput.value = profileSubheading.textContent.trim();
 
-  // openModal(profileEditModal);
+  profilePopup.open(addCardModal);
   resetFormValidation(profileEditForm);
 });
 
@@ -227,7 +186,7 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 // Add Card Button
 addCardBtn.addEventListener("click", () => {
-  openModal(addCardModal);
+  addCardPopup.open(addCardModal);
 });
 
 // Add Card Form
