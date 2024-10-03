@@ -160,10 +160,7 @@ function handleAddCardSubmit(inputValues) {
 /* -------------------------- Image Preview Handler ------------------------- */
 
 function handleImgClick(data) {
-  imagePopup.open(imgModal);
-  imgFull.src = data.link;
-  imgFull.alt = data.name;
-  imgCaption.textContent = data.name;
+  imagePopup.open({ name: data.name, link: data.link });
 }
 
 /* -------------------------------------------------------------------------- */
