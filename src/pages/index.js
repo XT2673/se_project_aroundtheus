@@ -184,18 +184,12 @@ profileEditBtn.addEventListener("click", () => {
   resetFormValidation(profileEditForm);
 });
 
-// Profile Edit Form
-// profileEditForm.addEventListener("submit", handleProfileEditSubmit);
-
 /* ----------------------------- Add Card Modal ----------------------------- */
 
 // Add Card Button
 addCardBtn.addEventListener("click", () => {
   addCardPopup.open(addCardModal);
 });
-
-// Add Card Form
-// addCardForm.addEventListener("submit", handleAddCardSubmit);
 
 /* --------------------------------- Popups --------------------------------- */
 
