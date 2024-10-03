@@ -4,7 +4,6 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
-import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
@@ -58,7 +57,6 @@ const cardTemplate =
 const cardsListEl = document.querySelector(".cards__list");
 
 // Modal Buttons
-const closeButtons = document.querySelectorAll(".modal__close");
 const profileEditBtn = document.querySelector("#profile-edit-btn");
 const addCardBtn = document.querySelector("#add-card-btn");
 
@@ -70,14 +68,14 @@ const imagePopup = new PopupWithImage("#full-image-modal");
 // Profile Modal
 const profilePopup = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
-  handleProfileEditSubmit,
+  handleFormSubmit: handleProfileEditSubmit,
 });
 profilePopup.setEventListeners();
 
 // Add Card Modal
 const addCardPopup = new PopupWithForm({
   popupSelector: "#add-card-modal",
-  handleAddCardSubmit,
+  handleFormSubmit: handleAddCardSubmit,
 });
 addCardPopup.setEventListeners();
 
@@ -95,8 +93,8 @@ const section = new Section(
 
 // User Info
 const userInfo = new UserInfo({
-  name: ".profile__heading",
-  about: ".profile__subheading",
+  nameSelector: ".profile__heading",
+  jobSelector: ".profile__subheading",
 });
 
 /* -------------------------------------------------------------------------- */
@@ -109,6 +107,12 @@ const userInfo = new UserInfo({
 initialCards.forEach((data) => {
   const cardElement = createCard(data);
   cardsListEl.append(cardElement);
+});
+
+// Populate Initial User Info
+userInfo.setUserInfo({
+  name: profileHeading.textContent,
+  job: profileSubheading.textContent,
 });
 
 /* --------------------------- Reset Form Validity -------------------------- */
@@ -138,20 +142,21 @@ function addCard(card) {
 /* ----------------------------- Sumbit Handlers ---------------------------- */
 
 // Edit Profile Submit Handler
-function handleProfileEditSubmit(e) {
-  e.preventDefault();
-  profileHeading.textContent = profileHeadingInput.value;
-  profileSubheading.textContent = profileSubheadingInput.value;
+function handleProfileEditSubmit(inputValues) {
+  console.log("inputValues", inputValues);
+  const { name, job } = inputValues;
+  userInfo.setUserInfo({ name, job });
   profilePopup.close(profileEditModal);
 }
 
 // Add New Card Submit Handler
-function handleAddCardSubmit(e) {
-  e.preventDefault();
+function handleAddCardSubmit(inputValues) {
+  // console.log(inputValues);
+  // e.preventDefault();
   const name = cardFormTitleInput.value;
   const link = cardFormUrlInput.value;
   addCard(createCard({ name, link }));
-  e.target.reset();
+  // e.target.reset();
   addCardPopup.close(addCardModal);
 }
 
@@ -180,7 +185,7 @@ profileEditBtn.addEventListener("click", () => {
 });
 
 // Profile Edit Form
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+// profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 /* ----------------------------- Add Card Modal ----------------------------- */
 
@@ -190,7 +195,7 @@ addCardBtn.addEventListener("click", () => {
 });
 
 // Add Card Form
-addCardForm.addEventListener("submit", handleAddCardSubmit);
+// addCardForm.addEventListener("submit", handleAddCardSubmit);
 
 /* --------------------------------- Popups --------------------------------- */
 

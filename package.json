@@ -1,7 +1,7 @@
 {
-  "name": "tripleten",
+  "name": "aroundtheus",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./src/pages/index.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve --mode development"
