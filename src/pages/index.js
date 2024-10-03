@@ -143,7 +143,6 @@ function addCard(card) {
 
 // Edit Profile Submit Handler
 function handleProfileEditSubmit(inputValues) {
-  console.log("inputValues", inputValues);
   const { name, job } = inputValues;
   userInfo.setUserInfo({ name, job });
   profilePopup.close(profileEditModal);
@@ -151,12 +150,10 @@ function handleProfileEditSubmit(inputValues) {
 
 // Add New Card Submit Handler
 function handleAddCardSubmit(inputValues) {
-  // console.log(inputValues);
-  // e.preventDefault();
   const name = cardFormTitleInput.value;
   const link = cardFormUrlInput.value;
   addCard(createCard({ name, link }));
-  // e.target.reset();
+
   addCardPopup.close(addCardModal);
 }
 

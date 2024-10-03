@@ -12,7 +12,6 @@ export default class UserInfo {
   }
 
   setUserInfo({ name, job }) {
-    console.log("setUserInfo called with:", { name, job });
     this._nameElement.textContent = name;
     this._jobElement.textContent = job;
   }
