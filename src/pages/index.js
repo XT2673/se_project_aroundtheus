@@ -141,6 +141,8 @@ function handleProfileEditSubmit(inputValues) {
 // Add New Card Submit Handler
 function handleAddCardSubmit(inputValues) {
   const { name, link } = inputValues;
+  console.log("Name", name);
+  console.log("Link", link);
   addCard(createCard({ name, link }));
   addCardPopup.close();
   addCardForm.reset();
@@ -160,6 +162,8 @@ function handleImgClick(data) {
 
 // Profile Edit Button
 profileEditBtn.addEventListener("click", () => {
+  profileHeadingInput.value = userInfo.getUserInfo().name;
+  profileSubheadingInput.value = userInfo.getUserInfo().job;
   profilePopup.open(addCardModal);
   resetFormValidation(profileEditForm);
 });
