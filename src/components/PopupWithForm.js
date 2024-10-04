@@ -13,7 +13,6 @@ export default class PopupWithForm extends Popup {
     this._formValues = {};
     this._inputList.forEach((input) => {
       this._formValues[input.name] = input.value;
-      this._formValues["id"] = this._cardId;
     });
 
     return this._formValues;
@@ -29,6 +28,5 @@ export default class PopupWithForm extends Popup {
 
   close() {
     super.close();
-    this._form.reset();
   }
 }

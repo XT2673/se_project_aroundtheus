@@ -104,16 +104,7 @@ const userInfo = new UserInfo({
 /* ----------------------------- Initializations ---------------------------- */
 
 // Populate Initial Cards
-initialCards.forEach((data) => {
-  const cardElement = createCard(data);
-  cardsListEl.append(cardElement);
-});
-
-// Populate Initial User Info
-userInfo.setUserInfo({
-  name: profileHeading.textContent,
-  job: profileSubheading.textContent,
-});
+section.renderItems();
 
 /* --------------------------- Reset Form Validity -------------------------- */
 
@@ -132,7 +123,7 @@ function createCard(item) {
 
 // Add New Card to DOM
 function addCard(card) {
-  cardsListEl.prepend(card);
+  section.addItem(card, true);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -145,16 +136,14 @@ function addCard(card) {
 function handleProfileEditSubmit(inputValues) {
   const { name, job } = inputValues;
   userInfo.setUserInfo({ name, job });
-  profilePopup.close(profileEditModal);
 }
 
 // Add New Card Submit Handler
 function handleAddCardSubmit(inputValues) {
-  const name = cardFormTitleInput.value;
-  const link = cardFormUrlInput.value;
+  const { name, link } = inputValues;
   addCard(createCard({ name, link }));
-
-  addCardPopup.close(addCardModal);
+  addCardPopup.close();
+  addCardForm.reset();
 }
 
 /* -------------------------- Image Preview Handler ------------------------- */
@@ -171,9 +160,6 @@ function handleImgClick(data) {
 
 // Profile Edit Button
 profileEditBtn.addEventListener("click", () => {
-  profileHeadingInput.value = profileHeading.textContent.trim();
-  profileSubheadingInput.value = profileSubheading.textContent.trim();
-
   profilePopup.open(addCardModal);
   resetFormValidation(profileEditForm);
 });
