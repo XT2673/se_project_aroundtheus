@@ -136,6 +136,7 @@ function addCard(card) {
 function handleProfileEditSubmit(inputValues) {
   const { name, job } = inputValues;
   userInfo.setUserInfo({ name, job });
+  profilePopup.close();
 }
 
 // Add New Card Submit Handler
@@ -162,9 +163,10 @@ function handleImgClick(data) {
 
 // Profile Edit Button
 profileEditBtn.addEventListener("click", () => {
-  profileHeadingInput.value = userInfo.getUserInfo().name;
-  profileSubheadingInput.value = userInfo.getUserInfo().job;
-  profilePopup.open(addCardModal);
+  const { name, job } = userInfo.getUserInfo();
+  profileHeadingInput.value = name;
+  profileSubheadingInput.value = job;
+  profilePopup.open();
   resetFormValidation(profileEditForm);
 });
 
@@ -172,7 +174,7 @@ profileEditBtn.addEventListener("click", () => {
 
 // Add Card Button
 addCardBtn.addEventListener("click", () => {
-  addCardPopup.open(addCardModal);
+  addCardPopup.open();
 });
 
 /* --------------------------------- Popups --------------------------------- */
@@ -198,3 +200,5 @@ function enableValidation(validationConfig) {
 }
 
 enableValidation(validationConfig);
+
+// I'm gonna get this down, I swear.
