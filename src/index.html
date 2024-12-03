@@ -28,11 +28,18 @@
           <!-- Profile -->
           <section class="profile">
             <div class="profile__container">
-              <img
+              <div class="profile__image-container"><img
                 src="<%=require('./images/JCAvatar.png')%>"
                 alt="Jacque Cousteau"
                 class="profile__image"
               />
+              <button
+                type="button"
+                aria-label="Change Profile Picture"
+                class="profile__avatar-edit-button"
+                id="change-profile-pic-btn"
+              ></button></div>
+              
               <div class="profile__caption">
                 <div class="profile__header">
                   <h1 class="profile__heading" id="profile-heading">
@@ -93,6 +100,7 @@
               required="required"
               minlength="2"
               maxlength="40"
+              autocomplete="off"
             />
             <span
               class="modal__error"
@@ -121,6 +129,35 @@
       </div>
     </div>
 
+    <!-- -------------------- Change Profile Picture Modal --------------------- -->
+    <div class="modal" id="change-profile-pic-modal">
+      <div class="modal__container">
+        <button
+          type="button"
+          class="modal__close"
+          id="change-profile-pic-modal-close-btn"
+        ></button>
+        <h3 class="modal__heading">Change Profile Picture</h3>
+        <form id="change-profile-pic-form" class="modal__form">
+          <label class="modal__label">
+            <input
+              type="url"
+              class="modal__input"
+              name="avatar"
+              placeholder="Image URL"
+              id="change-profile-pic-modal-input"
+              required="required"
+            />
+            <span
+              class="modal__error"
+              id="change-profile-pic-modal-input-error"
+            ></span>
+          </label>
+
+          <button type="submit" class="modal__save">Save</button>
+        </form>
+      </div>
+
     <!-- --------------------------- Add Card Modal ---------------------------- -->
 
     <div class="modal" id="add-card-modal">
@@ -132,7 +169,7 @@
         ></button>
         <h3 class="modal__heading">New Place</h3>
         <form id="add-card-form" class="modal__form">
-          <label for="" class="modal__label"
+          <label class="modal__label"
             ><input
               type="text"
               class="modal__input"
@@ -141,13 +178,14 @@
               id="add-card-modal-title-input"
               required="required"
               minlength="1"
-              maxlength="30" />
+              maxlength="30"
+              autocomplete="off" />
             <span
               class="modal__error"
               id="add-card-modal-title-input-error"
             ></span
           ></label>
-          <label for="" class="modal__label"
+          <label class="modal__label"
             ><input
               type="url"
               class="modal__input"
@@ -188,6 +226,22 @@
         <p class="modal__caption" id="full-image-caption">Yosemite Park</p>
       </div>
     </div>
+
+    <!-- ------------------------ Confirm Delete Modal ------------------------- -->
+    <div class="modal" id="confirm-delete-modal">
+      <div class="modal__container">
+        <button
+          type="button"
+          class="modal__close"
+          id="confirm-delete-modal-close-btn"
+        ></button>
+        <p class="modal__heading">Are you sure?</p>
+        <form id="confirm-delete-form" class="modal__form">
+          <button type="submit" class="modal__save">Yes</button>
+        </form>
+      </div>
+
+      
 
     <!-- ----------------------------------------------------------------------- -->
     <!--                              Card Template                              -->

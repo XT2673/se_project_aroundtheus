@@ -6,12 +6,24 @@
 
 .profile__container {
   display: flex;
+  align-items: center;
+}
+
+.profile__image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .profile__image {
   height: 120px;
   width: 120px;
   border-radius: 50%;
+  transition: 0.3s linear;
+}
+
+.profile__image:hover {
+  opacity: 0.6;
 }
 
 .profile__caption {
@@ -48,9 +60,34 @@
 }
 
 .profile__button-edit:hover {
-  opacity: 60%;
+  opacity: 0.6;
 }
 
+.profile__avatar-edit-button {
+  background: transparent url(../images/Buttons/Edit-Avatar_btn.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  border-style: none;
+  height: 26px;
+  width: 26px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: 0.3s linear;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.profile__avatar-edit-button:hover,
+.profile__image:hover + .profile__avatar-edit-button {
+  opacity: 1;
+}
+
+.profile__avatar-edit-button:hover ~ .profile__image,
+.profile__image-container:hover .profile__image {
+  opacity: 0.6;
+}
 .profile__subheading {
   margin: 0;
   max-width: 282px;
